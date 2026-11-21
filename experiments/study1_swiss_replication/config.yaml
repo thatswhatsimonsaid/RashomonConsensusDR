@@ -1,0 +1,23 @@
+# Same protocol as the S-curve replication, with the Swiss roll unfolding.
+# Arc length is the integral of sqrt(1+t^2), not the generator parameter t.
+study: swiss_replication
+manifold: swiss
+n_samples: 400
+noise: 0.05
+methods: [umap, infonce, pacmap]
+training_seeds: [0, 1, 2]
+lambdas: [0.0, 1.0, 5.0]
+cne_epochs: 200
+pacmap_epochs: 450
+k_neighbors: 15
+k_eval: 10
+negative_samples: 5
+native_draws: 4
+pair_seed: 0
+matched_seeds: 10
+random_one_seeds: 5
+primary_epsilon: 0.05
+data_seed_offset: 2000
+eval_seed_offset: 6000
+n_triplets: 4000
+isometric_disagreement_threshold: 0.10

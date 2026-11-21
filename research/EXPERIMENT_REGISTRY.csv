@@ -1,0 +1,4 @@
+experiment_id,date,status,config,data_seeds,primary_metric,result_dir,notes
+S1-SCURVE-REP,2026-11-21,complete,experiments/study1_s_curve_replication/config.yaml,1000-1004,intrinsic_triplet_balanced,results/checkpoint3/s_curve_replication,Five pools. Balanced endpoint favors the full pool. Arc-length ordering favors epsilon 0.05.
+S1-SWISS-LOCK,2026-11-21,diagnosed,experiments/study1_swiss_replication/config.yaml,2000-2004,intrinsic_triplet_balanced,results/checkpoint3/swiss_replication,Geometry lock only. No embeddings trained.
+S4-CONTROLLED,2026-11-21,complete,redr/redr/controlled.py scenarios,7000-7024,intrinsic_triplet_balanced,results/checkpoint3/controlled_ensembles,25 reps. Oracle rows are upper bounds. See paired.csv.
