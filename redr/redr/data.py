@@ -7,7 +7,7 @@ alignment target and does not receive class labels.
 from __future__ import annotations
 
 import numpy as np
-from sklearn.datasets import load_digits, load_iris, make_swiss_roll
+from sklearn.datasets import load_digits, load_iris, make_s_curve, make_swiss_roll
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -21,6 +21,7 @@ def load_dataset(name: str, seed: int = 0) -> dict:
         label_names = [str(v) for v in bunch.target_names]
         discrete = True
         color = labels.astype(np.float64)
+        latent = None
     elif name == "swiss":
         x_raw, color = make_swiss_roll(
             n_samples=300, noise=0.15, random_state=seed
@@ -30,6 +31,15 @@ def load_dataset(name: str, seed: int = 0) -> dict:
         labels = None
         label_names = None
         discrete = False
+        latent = color.copy()
+    elif name == "s_curve":
+        x_raw, color = make_s_curve(n_samples=400, noise=0.05, random_state=seed)
+        x_raw = np.asarray(x_raw, dtype=np.float64)
+        color = np.asarray(color, dtype=np.float64)
+        labels = None
+        label_names = None
+        discrete = False
+        latent = color.copy()
     elif name == "digits":
         # 8x8 digits stand in only when a full MNIST download is unavailable.
         bunch = load_digits()
@@ -45,11 +55,13 @@ def load_dataset(name: str, seed: int = 0) -> dict:
         label_names = [str(i) for i in range(10)]
         discrete = True
         color = labels.astype(np.float64)
+        latent = None
     elif name == "mnist":
         x_raw, labels = _mnist_subset(n_per_class=20, seed=seed)
         label_names = [str(i) for i in range(10)]
         discrete = True
         color = labels.astype(np.float64)
+        latent = None
     else:
         raise ValueError(f"Unknown dataset {name}")
 
@@ -65,6 +77,8 @@ def load_dataset(name: str, seed: int = 0) -> dict:
         "label_names": label_names,
         "discrete_labels": discrete,
         "color": color,
+        "latent": None if latent is None else np.asarray(latent, dtype=np.float64),
+        "observation_ids": np.arange(x.shape[0], dtype=np.int64),
         "n": int(x.shape[0]),
         "p": int(x.shape[1]),
     }

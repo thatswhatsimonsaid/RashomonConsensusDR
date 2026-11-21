@@ -18,8 +18,11 @@ while read -r name url sha; do
   fi
   git -C "${dest}" fetch --depth 1 origin "${sha}"
   git -C "${dest}" checkout --detach "${sha}"
-  if [[ -n "$(git -C "${dest}" status --porcelain)" ]]; then
+  # Editable installs write __pycache__ and *.egg-info. Those are not source edits.
+  dirty="$(git -C "${dest}" status --porcelain | grep -vE '__pycache__|\.egg-info|\.pyc' || true)"
+  if [[ -n "${dirty}" ]]; then
     echo "Refusing to continue: ${dest} has local modifications." >&2
+    echo "${dirty}" >&2
     exit 1
   fi
 done < "${LOCK}"

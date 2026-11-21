@@ -1,0 +1,14 @@
+name: s_curve
+dataset: s_curve
+methods: [umap, infonce, pacmap]
+seeds: [0, 1, 2]
+lambdas: [0.0, 1.0, 5.0]
+cne_epochs: 200
+pacmap_epochs: 450
+k_neighbors: 15
+k_eval: 10
+negative_samples: 5
+native_draws: 4
+matched_seeds: 5
+random_conventional_seeds: 3
+contamination: false

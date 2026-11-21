@@ -8,6 +8,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from redr.validation import validate_embeddings
+
 
 R_SCRIPT = Path(__file__).resolve().parents[1] / "r" / "fit_consensus.R"
 
@@ -62,7 +64,11 @@ def fit_consensus(
     weightmat: np.ndarray | None = None,
     tau: float = 0.1,
     percentile: float = 0.5,
+    observation_ids: np.ndarray | None = None,
 ) -> dict:
+    embeddings = validate_embeddings(embeddings, observation_ids=observation_ids)
+    if weights is not None and len(np.asarray(weights)) != len(embeddings):
+        raise ValueError("Source weights must have one entry per embedding")
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     payload = out_dir / "payload.bin"
