@@ -1,0 +1,6 @@
+stress=1.783773873504183e-01
+rss=2.577054083182622e+03
+niter=210
+seconds=7.416600000000001e+01
+nobj=400
+model=Consensus MDS

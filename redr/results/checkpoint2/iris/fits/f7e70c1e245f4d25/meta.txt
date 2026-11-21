@@ -1,0 +1,6 @@
+stress=8.38091145718053e-02
+rss=6.193051861520208e+03
+niter=28
+seconds=7.301e+00
+nobj=150
+model=Local Consensus MDS
