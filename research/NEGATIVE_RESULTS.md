@@ -13,6 +13,20 @@ Native-loss restriction did not consistently improve consensus.
 - Adding three badly undertrained views to the Iris pool did not harm uniform CoMDS. The consensus step can already ignore a small amount of contamination.
 - The S-curve LoCoMDS latent-triplet edge at epsilon 0.05 (0.927 versus matched 0.913 and one-per-method 0.917) is one pool, scored on the one-dimensional generator parameter.
 
+## S-curve replication, five independent pools
+
+Uniform LoCoMDS at the pre-specified epsilon 0.05 loses the confirmatory endpoint, coordinate-balanced intrinsic triplet accuracy.
+
+- Versus the full pool: −0.021 (sd 0.012), worse in 5 of 5.
+- Versus a size-matched draw: −0.010 (sd 0.006), worse in 5 of 5.
+- Versus one lowest-native embedding per method: −0.010 (sd 0.007), worse in 4 of 5.
+
+The balanced-accuracy curve is lowest at epsilon 0.05 and 0.10 and highest when every candidate is kept. CoMDS at epsilon 0.05 is worse than one embedding per method by 0.031 (sd 0.008), 5 of 5.
+
+The Checkpoint 2 arc-length edge does replicate, and it is the wrong conclusion for surface recovery. LoCoMDS arc-length triplet accuracy at epsilon 0.05 beats the full pool by 0.022 (sd 0.004) in 5 of 5, and beats the matched draw by 0.010 in 5 of 5. The same fits lose height triplet accuracy to the full pool by 0.023 in 5 of 5, and lose ambient triplet accuracy by 0.016 in 5 of 5. Candidate height triplet accuracy averages 0.56. The best candidate reaches 0.69.
+
+Numbers and the geometry lock are in `research/CHECKPOINT_3_REPORT.md`.
+
 ## Unfolded manifolds are not tested by one-axis triplets
 
 On the S-curve, arc length spans about 9.4 and the transverse coordinate spans about 2.0. Across data seeds 1000–1004, adding the transverse coordinate changes only 3.3% of random triplet decisions. On the Swiss roll the rate is 4.1% (seeds 2000–2004). An embedding that orders the curve and collapses the width still scores well on isometric triplet accuracy. That score is not evidence of surface recovery. The confirmatory endpoint for these replications is the coordinate-balanced intrinsic triplet, chosen before consensus fitting. See `results/checkpoint3/s_curve_replication/geometry_lock.json`.

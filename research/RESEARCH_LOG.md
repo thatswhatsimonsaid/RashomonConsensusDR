@@ -29,7 +29,13 @@ Result of that rule.
 
 Arc-length ordering and the raw generator parameter are still reported. On the S-curve they are the same coordinate, because the curve has unit speed. On the Swiss roll they are not. One-dimensional ordering is not called manifold recovery.
 
-Status. Candidate training for the five S-curve pools is running. Consensus has not been fit. No claim about REDR follows from this entry.
+Result. Five pools, 135 embeddings, both CoMDS and LoCoMDS. On coordinate-balanced triplet accuracy, uniform LoCoMDS at epsilon 0.05 is below the full pool by 0.021 (worse in 5 of 5), below the matched draw by 0.010 (5 of 5), and below one embedding per method by 0.010 (4 of 5). The epsilon curve bottoms at 0.05–0.10.
+
+The arc-length triplet, which is the Checkpoint 2 score on this curve, moves the other way: epsilon 0.05 beats the full pool by 0.022 in 5 of 5. Height triplet accuracy and ambient triplet accuracy move with the balanced score, not with arc length. Candidate height triplet accuracy averages 0.56.
+
+Interpretation. The exploratory LoCoMDS edge was curve ordering. It is not recovery of the rectangle. The filter drops higher-loss PaCMAP runs. Those runs hurt arc order and help the transverse coordinate. Because UMAP and InfoNCE barely vary in native loss, the band mostly edits the PaCMAP slice.
+
+The full table is in `research/CHECKPOINT_3_REPORT.md`. The 25-replication cluster array should not be launched to confirm a gain that the pre-registered endpoint did not show.
 
 ## 2026-11-21 — S4 controlled embeddings, mechanism pilot
 

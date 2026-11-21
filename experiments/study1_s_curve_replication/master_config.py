@@ -24,9 +24,11 @@ SLURM_CONFIG = {
     "r_module": os.environ.get("REDR_SLURM_R_MODULE", ""),
 }
 
-# Local pilot on this machine, one S-curve pool of 27 embeddings:
-# UMAP/InfoNCE about 15-40s each at n=400, consensus about 3-90s per fit
-# depending on the number of views. Replace these after the pilot log
-# has a finished replication.
-ESTIMATED_CANDIDATE_HOURS = float(os.environ.get("REDR_EST_CANDIDATE_HOURS", "0.5"))
-ESTIMATED_CONSENSUS_HOURS = float(os.environ.get("REDR_EST_CONSENSUS_HOURS", "1.5"))
+# Measured on the five-replication pilot, n=400, 27 embeddings per pool.
+# Candidate generation: 0.72 hours of summed fit time across 135 embeddings,
+# about 0.22 wall-clock hours per replication on 4 CPU threads.
+# Consensus: 5.89 hours of summed R time, about 0.55 wall-clock hours per
+# replication with two concurrent fits. These defaults are task wall-clock
+# hours, not core-hours.
+ESTIMATED_CANDIDATE_HOURS = float(os.environ.get("REDR_EST_CANDIDATE_HOURS", "0.25"))
+ESTIMATED_CONSENSUS_HOURS = float(os.environ.get("REDR_EST_CONSENSUS_HOURS", "0.60"))

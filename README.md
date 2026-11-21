@@ -11,6 +11,7 @@ The research code, Checkpoint 1 results, and Checkpoint 2 experiments are in [`r
 | `redr/DECISIONS.md` | Checkpoint 1 design choices |
 | `redr/CHECKPOINT_2_REPORT.md` | Checkpoint 2 findings |
 | `redr/CHECKPOINT_2_DECISIONS.md` | Checkpoint 2 design choices |
+| `research/CHECKPOINT_3_REPORT.md` | Five-pool S-curve replication and the mechanism pilot |
 | `research/RESEARCH_LOG.md` | Checkpoint 3 log, including the frozen intrinsic metric |
 | `research/NEGATIVE_RESULTS.md` | Unfavorable findings that stay in the record |
 
