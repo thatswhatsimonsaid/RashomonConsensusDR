@@ -54,3 +54,37 @@ This does not yet say what CoMDS or LoCoMDS will do on the S-curve. It does say 
 ## Next
 
 Finish the five S-curve pools and their consensus fits. Read the balanced intrinsic triplet first. Do not expand to 25 cluster replications unless that endpoint, against the full pool and against one embedding per method, is actually promising. Swiss roll stays locked and untrained until that reading.
+
+## 2026-11-21 — Complementary views, after the S-curve reading
+
+Experiment IDs: `S8-COMPLEMENTARY`, `S8-CONTROLLED-COMDS`.
+
+The S-curve reading is in the Checkpoint 3 report. The balanced endpoint did not favor epsilon 0.05. That array stays unsubmitted.
+
+Question. If some embeddings preserve one intrinsic direction and others preserve a different one, which selection rule keeps both, and which aggregator can use them?
+
+Design, written to `results/checkpoint4/complementary/study_lock.json` before the replication grid. A one-replication smoke with PCA-initialized t-SNE is archived under `complementary_smoke` and is not in the table. t-SNE in the pilot uses random initialization, because PCA initialization made the two seeds identical.
+
+- Square, standardized, both curves present. Seeds 4000–4003. This is the favorable case.
+- Stretched, aspect (5, 1), scale preserved in the observations. Seeds 4300–4303. Joint distances are dominated by the long axis.
+- Hidden second curve. Seeds 4200–4203. The unfavorable case where the direction is not in the data.
+- A condition named `long` only rescaled the evaluation coordinates. It is an extra square draw, not an aspect test.
+- Structural loss is fixed: one minus multiscale neighborhood preservation on the full observed matrix. Geodesic correlation is stored and not used for membership.
+- Rules: all, method-specific epsilon 0.05, pooled structural epsilon 0.05, hybrid, diversity inside the pooled set, joint only, specialist only, best single structural embedding.
+- Aggregators: Procrustes, CoMDS, LoCoMDS.
+
+Result, four replications. Full table in `research/CHECKPOINT_4_REPORT.md`.
+
+On the square, specialist LoCoMDS balanced triplet accuracy is 0.969. It beats joint LoCoMDS by 0.090 (4 of 4), pooled LoCoMDS by 0.102 (4 of 4), and the best structural embedding by 0.136 (4 of 4). The same fits lose trustworthiness to the joint consensus by 0.029 (0 of 4). The method-specific band changes the score by +0.002. The structural band keeps joint views only.
+
+On the stretched surface, joint CoMDS has v triplet 0.512 and u triplet 0.974. Specialist CoMDS has balanced accuracy 0.957 and beats joint CoMDS by 0.204 (4 of 4), at a cost of 0.217 on the long-axis triplet and 0.044 on trustworthiness. LoCoMDS on that specialist pool failed on two of four replications (0.693 and 0.727) while CoMDS did not.
+
+When the second curve is noise, v triplet accuracy is 0.50 for every rule, and the specialist pool is worse than the joint pool.
+
+Neighborhood entropy does not predict latent neighborhood error in these four replications.
+
+The controlled CoMDS grid (n = 80, four replications) separates two mechanisms. On complementary damage, LoCoMDS of every view beats Procrustes and beats a quality filter. On a majority that has destroyed one axis, a pooled score that tracks the error beats the full pool, and a within-method band does not. An uninformative score makes the pooled rule worse. Details and the figure are in the Checkpoint 4 report.
+
+## Next
+
+Do not submit the S-curve confirmation array. The complementary array is described by `experiments/study8_complementary/generate_sbatch_arrays.py` and was not submitted. It repeats square, stretched, and hidden-second for 25 seeds that do not overlap this pilot, so the specialist-versus-joint gap, the structural filter, and the LoCoMDS failures can be checked independently. Swiss roll stays untrained.

@@ -120,3 +120,19 @@ Cluster arrays are described, and not submitted, by:
 ```bash
 python experiments/study1_s_curve_replication/generate_sbatch_arrays.py
 ```
+
+## Checkpoint 4 complementary geometry
+
+Selection rules and the product-manifold pilot are in `research/CHECKPOINT_4_REPORT.md`. Latent coordinates are not an input to selection.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_complementary.py \
+  --config experiments/study8_complementary/config.yaml \
+  --condition square --reps 0,1,2,3 --stage all
+PYTHONPATH=redr python redr/scripts/run_complementary.py \
+  --config experiments/study8_complementary/config.yaml --stage summarize
+PYTHONPATH=redr python redr/scripts/run_controlled_consensus.py --reps 4
+python experiments/study8_complementary/generate_sbatch_arrays.py
+```
+
+The S-curve confirmation array from Checkpoint 3 is not the study to submit. The new array, still a dry-run until a partition is set, is `experiments/study8_complementary/`.
