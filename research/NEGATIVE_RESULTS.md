@@ -46,3 +46,18 @@ The size-matched draw is a weak comparison when the filter keeps about 3 views o
 - Gibbs weights on the filtered set change the coordinate average by less than 0.01, and usually slightly downward.
 
 Square geometry with complementary errors and a noisy score is the setting where filtering beats the full pool in the point estimate (+0.009, sd 0.026) but only in 16 of 25 replications. That is not a stable advantage.
+
+## Checkpoint 4, four-replication pilot
+
+The product-manifold results are in `research/CHECKPOINT_4_REPORT.md`. These are the unfavorable parts. They are not cancelled by the CoMDS gain on complementary views.
+
+- Method-specific reference-loss bands at epsilon 0.05 change square LoCoMDS by +0.002. The losses do not vary enough inside a group to be a selection rule.
+- The pooled structural score keeps joint embeddings and drops every specialist. On the square that costs about 0.10 balanced triplet accuracy against specialist LoCoMDS (4 of 4). On the stretched surface it keeps the long axis (u triplet about 0.94, v triplet 0.51) and costs about 0.22 against specialist CoMDS (4 of 4).
+- Diversity inside that pooled set cannot recover the specialists the score already removed.
+- Procrustes averaging of the specialist pool does not combine the two directions. On the square it scores 0.778 against 0.969 for LoCoMDS on the same views.
+- LoCoMDS is unstable on the stretched specialist pool: balanced scores 0.966, 0.693, 0.727, 0.933. CoMDS on the same four pools stayed between 0.945 and 0.964.
+- Ambient trustworthiness moves against the complementary consensus. On the square, specialist LoCoMDS loses 0.029 to joint LoCoMDS and 0.054 to the single best structural embedding (0 of 4 the other way).
+- When the second curve is replaced by noise, every rule has v triplet accuracy at 0.50. Specialist CoMDS is worse than joint CoMDS by 0.025 (0 of 4).
+- Between-method neighborhood entropy does not track latent neighborhood error. Square Spearman correlations are near zero and change sign across rules and replications.
+- A pooled quality threshold hurts when the score is uninformative or misleading. On the controlled complementary ensemble, full-pool LoCoMDS stays at 0.932 while the misleading filter falls to 0.53 (4 of 4).
+- The condition named `long` did not change the observations. Per-feature standardization removed the aspect weight. It is not evidence about aspect ratio. The stretched condition is the aspect test.

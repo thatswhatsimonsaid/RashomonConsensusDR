@@ -23,7 +23,18 @@ The open empirical question is narrower than "combine RashomonDR with CoMDS":
 - When the score used for the band is only weakly related to latent error, does the band help, do nothing, or throw away useful views?
 - Does a method-specific band keep a method that is consistently wrong, while a pooled threshold would drop it?
 
-A publishable answer has to be one of those, with the baselines above, and it has to remain after independent replications. Checkpoint 2 did not establish a positive answer.
+A publishable answer has to be one of those, with the baselines above, and it has to remain after independent replications. Checkpoint 2 did not establish a positive answer. Checkpoint 3 answered the S-curve version in the negative for the balanced surface.
+
+## Checkpoint 4, still a pilot
+
+The open question moved. CoMDS already aggregates heterogeneous embeddings. The empirical claim that would be new is narrower:
+
+- When views preserve different intrinsic directions, a consensus of the complementary views recovers balanced geometry that the joint-only embeddings and a neighborhood-preservation filter both miss.
+- That gain is the aggregator, not a within-method native-loss band. The band does not move.
+- The same consensus does not invent a direction that no view contains.
+- A pooled quality threshold is a different tool. It helps when a minority of views hold a direction the majority destroyed and the score tracks that error. It hurts when the score does not, and it hurts when the complementary views are the ones with worse full-matrix neighborhood preservation.
+
+The four-replication pilot is consistent with that split. It is not a 25-replication confirmation, and LoCoMDS failed on two stretched pools where CoMDS did not. A paper would have to report the trustworthiness trade-off and the aggregator instability, and it would have to survive the cluster seeds in `experiments/study8_complementary/`. Beating Procrustes on complementary views is not, by itself, new: it is what CoMDS is for. The selection result is which rule keeps the complementary views and which rule deletes them.
 
 ## Consequence for the experiments
 

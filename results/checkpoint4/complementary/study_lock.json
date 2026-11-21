@@ -1,0 +1,26 @@
+{
+  "primary_metric": "intrinsic_triplet_balanced",
+  "axis_metrics": [
+    "u_triplet",
+    "v_triplet"
+  ],
+  "structural_loss": "one minus mean neighborhood preservation at k=5,15,30 on the full observed matrix",
+  "primary_epsilon": 0.05,
+  "contrasts": [
+    "specialist uniform LoCoMDS versus joint uniform LoCoMDS",
+    "pooled uniform LoCoMDS versus specialist uniform LoCoMDS",
+    "specialist uniform LoCoMDS versus the single lowest structural loss",
+    "method-specific uniform versus all-uniform",
+    "the same contrasts for CoMDS and for Procrustes",
+    "square_hidden: v_triplet near one half for every rule"
+  ],
+  "not_used_for_selection": [
+    "intrinsic coordinates",
+    "u",
+    "v",
+    "labels"
+  ],
+  "tsne_init": "random",
+  "umap_compatibility_layout": true,
+  "note": "A one-replication smoke used PCA initialization for t-SNE and is archived under complementary_smoke. It is not in the paired table."
+}
