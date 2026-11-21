@@ -8,6 +8,7 @@ Labels are used only by the silhouette score.
 from __future__ import annotations
 
 import numpy as np
+from scipy.stats import spearmanr
 from sklearn.manifold import trustworthiness
 from sklearn.metrics import pairwise_distances, silhouette_score
 from sklearn.neighbors import NearestNeighbors
@@ -82,6 +83,54 @@ def _sample_triplets(n: int, n_triplets: int, rng: np.random.Generator) -> np.nd
     if len(picked) < n_triplets:
         raise RuntimeError("Could not sample enough distinct triplets")
     return picked
+
+
+def distance_rank_correlation(x: np.ndarray, z: np.ndarray) -> float:
+    """Spearman correlation of the upper triangles of the two distance matrices."""
+    dx = pairwise_distances(x)
+    dz = pairwise_distances(z)
+    iu = np.triu_indices(x.shape[0], k=1)
+    corr, _p = spearmanr(dx[iu], dz[iu])
+    return float(corr)
+
+
+def multi_k_lcmc(x: np.ndarray, z: np.ndarray, ks: list[int] | tuple[int, ...]) -> float:
+    """Mean adjusted LCMC over several neighborhood sizes."""
+    return float(np.mean([lcmc(x, z, k) for k in ks]))
+
+
+def knn_classification_accuracy(z: np.ndarray, labels: np.ndarray, k: int = 10) -> float:
+    """Leave-one-out accuracy of a kNN classifier on the embedding."""
+    neighbors = knn_indices(z, k)
+    predicted = []
+    for i in range(len(labels)):
+        votes = labels[neighbors[i]]
+        values, counts = np.unique(votes, return_counts=True)
+        predicted.append(values[np.argmax(counts)])
+    return float(np.mean(np.asarray(predicted) == np.asarray(labels)))
+
+
+def scale_adjusted_distance_error(x: np.ndarray, z: np.ndarray) -> float:
+    """Mean absolute error of distances after each matrix is divided by its mean."""
+    dx = pairwise_distances(np.asarray(x, dtype=float))
+    dz = pairwise_distances(np.asarray(z, dtype=float))
+    iu = np.triu_indices(dx.shape[0], k=1)
+    dx = dx[iu]
+    dz = dz[iu]
+    dx = dx / max(float(dx.mean()), 1e-12)
+    dz = dz / max(float(dz.mean()), 1e-12)
+    return float(np.mean(np.abs(dx - dz)))
+
+
+def latent_triplet_accuracy(
+    latent: np.ndarray,
+    z: np.ndarray,
+    triplets: np.ndarray,
+) -> float:
+    """Triplet accuracy against a 1-d latent coordinate, using absolute differences."""
+    t = np.asarray(latent, dtype=float).reshape(-1)
+    high = np.column_stack([t, np.zeros(len(t))])
+    return triplet_accuracy(high, z, triplets=triplets)
 
 
 def evaluate_embedding(

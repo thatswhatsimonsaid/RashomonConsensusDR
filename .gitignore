@@ -1,1 +1,8 @@
 external/
+.redr-venv/
+redr/vendor/
+**/__pycache__/
+*.pyc
+redr/results/**/payload.bin
+redr/results/**/rscript.log
+redr/results/**/*_run.log

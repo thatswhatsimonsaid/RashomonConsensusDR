@@ -2,7 +2,9 @@
 
 Proof of concept that builds method-specific Rashomon sets of dimension-reduction embeddings and combines them with Consensus Multidimensional Scaling.
 
-This directory is a separate project. It does not change the Rashomon active-learning code in the rest of the repository. The upstream checkouts of [RashomonDR](https://github.com/williamsyy/RashomonDR) and [coMDS](https://github.com/tiffanymtang/coMDS) are cloned by `setup_vendor.sh` and are not edited. Pins are in `VENDOR.lock`.
+This directory is the REDR project in [RashomonConsensusDR](https://github.com/thatswhatsimonsaid/RashomonConsensusDR). The upstream checkouts of [RashomonDR](https://github.com/williamsyy/RashomonDR) and [coMDS](https://github.com/tiffanymtang/coMDS) are cloned by `setup_vendor.sh` and are not edited. Pins are in `VENDOR.lock`.
+
+Checkpoint 1 results stay in `results/{iris,swiss,mnist}`. Checkpoint 2 adds `CHECKPOINT_2_REPORT.md`, `CHECKPOINT_2_DECISIONS.md`, and `results/checkpoint2/`. On macOS, install PyTorch from the selector at pytorch.org. The CPU wheel index below is for Linux.
 
 Papers:
 
@@ -73,3 +75,17 @@ Outputs for each dataset:
 - `results/metrics_all.csv` — the three datasets stacked
 
 Class labels are used for silhouette scores and for plot colors. Training sees a 2D PCA alignment target, not the labels.
+
+## Checkpoint 2
+
+Tests, then the two executed pools:
+
+```bash
+PYTHONPATH=redr python -m unittest discover -s redr/tests -v
+PYTHONPATH=redr python redr/scripts/verify_bridge.py
+PYTHONPATH=redr python redr/scripts/swiss_pacmap_anomaly.py
+PYTHONPATH=redr python redr/scripts/run_checkpoint2.py --config redr/configs/checkpoint2_iris.yaml
+PYTHONPATH=redr python redr/scripts/run_checkpoint2.py --config redr/configs/checkpoint2_s_curve.yaml
+```
+
+`run_checkpoint2.py` reuses `results/checkpoint2/<name>/candidates/*.npy` when those files are present. The Iris run trained 75 embeddings and fit 76 consensus jobs. The S-curve run trained 27 embeddings. Findings are in `CHECKPOINT_2_REPORT.md`.
