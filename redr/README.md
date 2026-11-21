@@ -89,3 +89,34 @@ PYTHONPATH=redr python redr/scripts/run_checkpoint2.py --config redr/configs/che
 ```
 
 `run_checkpoint2.py` reuses `results/checkpoint2/<name>/candidates/*.npy` when those files are present. The Iris run trained 75 embeddings and fit 76 consensus jobs. The S-curve run trained 27 embeddings. Findings are in `CHECKPOINT_2_REPORT.md`.
+
+## Checkpoint 3 intrinsic replications
+
+The confirmatory endpoint is chosen from the unfolding, before consensus is fit. Run the geometry lock first, then candidates, then consensus.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_intrinsic_replication.py \
+  --config experiments/study1_s_curve_replication/config.yaml \
+  --reps 0,1,2,3,4 --stage diagnose
+PYTHONPATH=redr python redr/scripts/run_intrinsic_replication.py \
+  --config experiments/study1_s_curve_replication/config.yaml \
+  --reps 0,1,2,3,4 --stage candidates
+PYTHONPATH=redr python redr/scripts/run_intrinsic_replication.py \
+  --config experiments/study1_s_curve_replication/config.yaml \
+  --reps 0,1,2,3,4 --stage consensus --workers 2
+PYTHONPATH=redr python redr/scripts/run_intrinsic_replication.py \
+  --config experiments/study1_s_curve_replication/config.yaml \
+  --reps 0,1,2,3,4 --stage summarize
+```
+
+The controlled-embedding mechanism pilot does not train UMAP or PaCMAP:
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_controlled.py --replications 25
+```
+
+Cluster arrays are described, and not submitted, by:
+
+```bash
+python experiments/study1_s_curve_replication/generate_sbatch_arrays.py
+```

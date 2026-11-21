@@ -1,0 +1,53 @@
+{
+  "primary_metric": "intrinsic_triplet_balanced",
+  "mean_order_disagreement": 0.033100000000000004,
+  "threshold": 0.1,
+  "reason": "Fewer than 10% of triplet decisions change when height is added to arc length, so the raw unfolding mostly restates arc-length order. The confirmatory endpoint is the coordinate-balanced intrinsic triplet.",
+  "replications": [
+    {
+      "replication": 0,
+      "data_seed": 1000,
+      "order_disagreement": 0.03525,
+      "arc_span": 9.398219839371098,
+      "height_span": 1.9984158953999507
+    },
+    {
+      "replication": 1,
+      "data_seed": 1001,
+      "order_disagreement": 0.03375,
+      "arc_span": 9.31662167564279,
+      "height_span": 1.9979318318610686
+    },
+    {
+      "replication": 2,
+      "data_seed": 1002,
+      "order_disagreement": 0.034,
+      "arc_span": 9.416532896791239,
+      "height_span": 1.993838245614075
+    },
+    {
+      "replication": 3,
+      "data_seed": 1003,
+      "order_disagreement": 0.02725,
+      "arc_span": 9.35479342852097,
+      "height_span": 1.981918554212129
+    },
+    {
+      "replication": 4,
+      "data_seed": 1004,
+      "order_disagreement": 0.03525,
+      "arc_span": 9.381594803848131,
+      "height_span": 1.9944329823405471
+    }
+  ],
+  "frozen_epsilon": 0.05,
+  "comparators": [
+    "conventional_native",
+    "matched_uniform",
+    "unrestricted_uniform",
+    "unrestricted_method_balanced",
+    "rashomon_uniform",
+    "rashomon_method_balanced",
+    "rashomon_gibbs"
+  ]
+}

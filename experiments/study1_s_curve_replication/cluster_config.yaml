@@ -1,0 +1,25 @@
+# Additional S-curve replications for a cluster array.
+# Local confirmatory seeds are 1000-1004. These do not overlap them.
+# Do not submit until the local five-replication result has been read.
+study: s_curve_replication_cluster
+manifold: s_curve
+n_samples: 400
+noise: 0.05
+methods: [umap, infonce, pacmap]
+training_seeds: [0, 1, 2]
+lambdas: [0.0, 1.0, 5.0]
+cne_epochs: 200
+pacmap_epochs: 450
+k_neighbors: 15
+k_eval: 10
+negative_samples: 5
+native_draws: 4
+pair_seed: 0
+matched_seeds: 10
+random_one_seeds: 5
+primary_epsilon: 0.05
+data_seed_offset: 1100
+eval_seed_offset: 8000
+n_triplets: 4000
+isometric_disagreement_threshold: 0.10
+n_replications: 25
