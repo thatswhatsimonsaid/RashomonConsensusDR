@@ -1,0 +1,30 @@
+# Cluster replication of the complementary-geometry pilot.
+# Local seeds are 4000, 4100, and 4200. These offsets do not overlap them.
+# Do not submit until the local paired table has been read.
+# Partition, memory, modules, and mail come from the environment.
+
+study: complementary_cluster
+n_samples: 200
+noise: 0.05
+n_nuisance: 8
+primary_epsilon: 0.05
+structural_ks: [5, 15, 30]
+eval_triplets: 3000
+eval_seed_offset: 11000
+conditions:
+  - name: square
+    aspect: [1.0, 1.0]
+    hide_second: false
+    replications: []
+    seed_offset: 5000
+  - name: stretched
+    aspect: [5.0, 1.0]
+    hide_second: false
+    preserve_scale: true
+    replications: []
+    seed_offset: 5300
+  - name: square_hidden
+    aspect: [1.0, 1.0]
+    hide_second: true
+    replications: []
+    seed_offset: 5200
