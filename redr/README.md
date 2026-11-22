@@ -135,4 +135,15 @@ PYTHONPATH=redr python redr/scripts/run_controlled_consensus.py --reps 4
 python experiments/study8_complementary/generate_sbatch_arrays.py
 ```
 
-The S-curve confirmation array from Checkpoint 3 is not the study to submit. The new array, still a dry-run until a partition is set, is `experiments/study8_complementary/`.
+The S-curve confirmation array from Checkpoint 3 is not the study to submit. `experiments/study8_complementary/` is a dry-run for the Checkpoint 4 specialist-versus-joint comparison. Checkpoint 5 did not establish a Rashomon advantage over concatenation or Isomap, so that array is not a Rashomon confirmation and was not submitted.
+
+## Checkpoint 5 automatic discovery
+
+Baselines, the unlabeled candidate pool, and the dependence-clustering follow-up are in `research/CHECKPOINT_5_REPORT.md`. Latent coordinates are not an input to selection.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_baselines.py
+PYTHONPATH=redr python redr/scripts/run_discovery.py
+PYTHONPATH=redr python redr/scripts/run_alternatives.py
+PYTHONPATH=redr python redr/scripts/plot_checkpoint5.py
+```

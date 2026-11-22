@@ -39,3 +39,11 @@ The four-replication pilot is consistent with that split. It is not a 25-replica
 ## Consequence for the experiments
 
 The S-curve replication compares Rashomon sets to matched unrestricted ensembles and to one embedding per method. Beating a single favorite embedding, or beating an untuned default, would not distinguish REDR from ordinary ensembling.
+
+## Checkpoint 5
+
+Sun, Huang, Parikh, and Rudin define the Rashomon set of a dimension-reduction loss as every parameterization within δ of the best loss (arXiv:2604.00485, Definition 3.1). Their extra term aligns non-neighbor pairs with PCA. The set is still one loss. It is not a union of embeddings that fail the full-matrix loss and succeed on different substructures.
+
+Zheng, Zhu, Li, Pang, Wang, and Chen (arXiv:2004.03106) build a shared graph and a complementary graph for multi-view subspace clustering. The views are given, and the output is a clustering. An and Tang already aggregate given embeddings. Bai, Wang, Long, and Hu already combine given distance matrices.
+
+Checkpoint 5 asked whether a Rashomon rule can discover those views from an unlabeled matrix and keep the ones a global score deletes. The local answer is no. Concatenating one-dimensional Isomaps of known blocks beats CoMDS of those blocks. After the columns are rotated, objective-specific bands, Pareto selection, and diversity rules do not beat Isomap, and the one clustering that beats Isomap on aligned columns is undone by its own 5% band. That is a boundary on the claim, not a new aggregator. A later claim has to beat unrestricted aggregation of the same automatic pool and beat Isomap after the blocks have been mixed, without using the latent coordinates to choose the pool.

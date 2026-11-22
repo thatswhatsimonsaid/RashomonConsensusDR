@@ -61,3 +61,17 @@ The product-manifold results are in `research/CHECKPOINT_4_REPORT.md`. These are
 - Between-method neighborhood entropy does not track latent neighborhood error. Square Spearman correlations are near zero and change sign across rules and replications.
 - A pooled quality threshold hurts when the score is uninformative or misleading. On the controlled complementary ensemble, full-pool LoCoMDS stays at 0.932 while the misleading filter falls to 0.53 (4 of 4).
 - The condition named `long` did not change the observations. Per-feature standardization removed the aspect weight. It is not evidence about aspect ratio. The stretched condition is the aspect test.
+
+## Checkpoint 5, local pilots
+
+The tables are in `research/CHECKPOINT_5_REPORT.md`. These designs did not produce a Rashomon advantage.
+
+- CoMDS of two known block configurations loses the balanced triplet to concatenating one-dimensional Isomaps of those blocks: square 0.945 versus 0.989, stretched 0.935 versus 0.986, four replications. Source-balanced CoMDS of the Checkpoint 4 pool loses the same comparison (0.956 and 0.915). The Checkpoint 4 specialist consensus is not evidence for a Rashomon method.
+- On the stretched surface, winning the balanced score and winning the isometric score are different outcomes. The raw latent coordinates score 0.782 balanced and 1.000 isometric. Isomap on the full matrix scores 0.759 and 0.965. Concatenated 1D Isomap scores 0.986 and 0.787. Block standardization before Isomap is what raises the short-axis triplet, from 0.518 to 0.717.
+- On rotated features, the union of five objective-specific bands changes unrestricted CoMDS by +0.004 (sd 0.031). The Pareto front loses to Isomap (−0.008, better in 1 of 3). Pooled multiscale CoMDS ties Isomap (+0.003). None of them recover both axes. Privileged concatenation remains near 0.986.
+- Marginal subset gain is worse than unrestricted CoMDS by 0.051 on the rotated square (0 of 3). Diversity with no quality gate is worse by 0.169 (0 of 3). Adding four noise embeddings makes that diversity rule worse by 0.211, while unrestricted CoMDS does not move.
+- The 5% Rashomon band on mutual-information clusters drops the second curve in 2 of 3 aligned replications. Unrestricted concatenation of the same clusters scores 0.930 and the band scores 0.799. After an orthogonal mix of the columns, that concatenation loses to Isomap by 0.180 (0 of 3).
+- One-dimensional stress does not rank complementary projections. The stress pair scores 0.546 aligned and 0.572 rotated, against Isomap at 0.865 and 0.837.
+- Agreement clustering with no quality gate loses to Isomap by about 0.25 on the square and lowers recovery when the second curve is absent.
+- Three informative directions in a two-dimensional embedding: known-block concatenation ties Isomap (difference −0.000, sd 0.031). The cluster Rashomon band is worse than keeping every large cluster (−0.072, sd 0.080, worse in 2 of 3).
+- A shared curve added to every block at weight 1 drops known-block concatenation to balanced 0.595. The integration fails when the blocks themselves are mixed.

@@ -13,7 +13,8 @@ The research code, Checkpoint 1 results, and Checkpoint 2 experiments are in [`r
 | `redr/CHECKPOINT_2_DECISIONS.md` | Checkpoint 2 design choices |
 | `research/CHECKPOINT_3_REPORT.md` | Five-pool S-curve replication and the mechanism pilot |
 | `research/CHECKPOINT_4_REPORT.md` | Complementary views, selection rules, and the CoMDS mechanism grid |
-| `research/RESEARCH_LOG.md` | Checkpoint 3 and 4 logs |
+| `research/CHECKPOINT_5_REPORT.md` | Automatic discovery, multi-objective Rashomon sets, and the metric audit |
+| `research/RESEARCH_LOG.md` | Checkpoint 3, 4, and 5 logs |
 | `research/NEGATIVE_RESULTS.md` | Unfavorable findings that stay in the record |
 
 `external/` is for local checkouts of RashomonDR and coMDS and is not part of this repository. `redr/setup_vendor.sh` clones the pinned commits into `redr/vendor/`.
