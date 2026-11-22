@@ -1,0 +1,3 @@
+dataset,rule,n_views,seconds,adjusted_rand,trustworthiness,lcmc_k20,intrinsic_triplet_balanced,intrinsic_triplet_isometric,arc_triplet_accuracy,height_triplet_accuracy
+gaussian,definition32_median_comds,15,39.427,1.0,0.9810059880239521,0.5756943516972732,,,,
+swiss,definition32_median_comds,15,34.015,,0.990650845253576,,0.75,0.883,0.868,0.5316666666666666

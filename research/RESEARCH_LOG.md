@@ -106,6 +106,27 @@ Without block labels, on rotated features, pooled multiscale CoMDS beats unrestr
 
 Mutual-information concatenation beats Isomap by 0.065 on aligned columns (3 of 3) and loses to it by 0.180 after rotation (0 of 3). The 5% self-view band drops the second curve in 2 of 3 aligned replications (−0.131). Stress pairs and agreement pairs lose to Isomap by about 0.25. Three latent directions do not fit in a two-dimensional embedding: known-block concatenation ties Isomap, and the Rashomon band is worse by 0.072. A shared curve of weight 1 drops even the known-block concatenation to 0.595.
 
-## Next
+## Next, after Checkpoint 5
 
 Do not submit the S-curve confirmation array. Do not submit `experiments/study8_complementary/` as a Rashomon study: concatenation of the known blocks already beats the specialist CoMDS that array would remeasure. No new 25-replication array is prepared. A later study needs a selection rule that, without block labels and after feature mixing, beats both unrestricted aggregation of the same pool and Isomap. Swiss roll stays untrained.
+
+## 2026-11-21 — Checkpoint 6, the original consensus question
+
+Question. On the simulations that motivated CoMDS and on the parametric families from RashomonDR, does a method-specific Rashomon set improve CoMDS or LoCoMDS relative to aggregating the same embeddings without that restriction?
+
+Design, fixed before the parametric scores.
+
+- An and Tang Gaussian mixture, n = 600, manuscript covariance, NumPy seed 331. Swiss roll, n = 400, manuscript parameter interval, same seed. Eleven views: PCA, classical MDS, LLE, Isomap, Laplacian eigenmaps, kernel PCA at the two manuscript sigmas, t-SNE at perplexity 30 and 50, UMAP at 30 and 50 neighbors. Meta-Spec kernel PCA. CoMDS. Three LoCoMDS settings, with the reported choice maximizing LCMC at k = 20.
+- Parametric pool: UMAP, InfoNCE, negative t-SNE at s = 0, noise-contrastive estimation (the vendored NCVis loss), PaCMAP. Seeds 0 and 1. Alignment weights 0, 1, and 5. Fifty CNE epochs, 200 PaCMAP epochs. Method-specific 5% native-loss band. Median neighborhood-overlap band. Quality weights with equal method mass. Five size-matched draws. Common-knowledge refit from the vendored mean-score procedure.
+- After the embeddings were saved, Definition 3.2 was applied as a median of mean soft-Jaccard distance inside each method, and that subset was aggregated with CoMDS. The median threshold matches the form used for the overlap band.
+- One Gaussian copy with observation noise 0.25. Four classical views plus their CoMDS. Neighbor-vote entropy on the parametric Gaussian pool.
+
+Result. Full table in `research/CHECKPOINT_6_REPORT.md`.
+
+PCA on the Gaussian mixture has adjusted Rand 0.972. CoMDS, LoCoMDS, UMAP, t-SNE, and Meta-Spec kernel PCA are all at or above 0.97. The visible difference is shape: CoMDS keeps elliptical clouds, and Meta-Spec, t-SNE, and UMAP tighten or bend them. On the Swiss roll, classical CoMDS forms a U (balanced triplet 0.672, end gap 13). LoCoMDS on the reduced grid has balanced triplet 0.654 and end gap 8.0. UMAP has balanced triplet 0.771 and end gap 39. The manuscript's LoCoMDS unfold was not reproduced at this sample size and hyperparameter grid.
+
+The 5% loss band keeps all 30 Gaussian embeddings and 26 of 30 Swiss embeddings. The Swiss drops are InfoNCE and PaCMAP at lambda 5. Loss-band CoMDS scores 0.753 against unrestricted CoMDS at 0.750 and the best InfoNCE embedding at 0.792. Definition 3.2 CoMDS scores 0.750. Common-knowledge UMAP scores 0.706. Vote entropy and false-neighbor rate have Spearman correlation 0.068.
+
+## Next
+
+Pause the original REDR direction. Do not submit a 25-replication array, and do not add another selection rule on the product manifolds or on these two simulations. CoMDS of heterogeneous embeddings remains An and Tang's method. These pilots do not show that a Rashomon restriction is what makes that consensus work.
