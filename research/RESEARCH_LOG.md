@@ -85,6 +85,27 @@ Neighborhood entropy does not predict latent neighborhood error in these four re
 
 The controlled CoMDS grid (n = 80, four replications) separates two mechanisms. On complementary damage, LoCoMDS of every view beats Procrustes and beats a quality filter. On a majority that has destroyed one axis, a pooled score that tracks the error beats the full pool, and a within-method band does not. An uninformative score makes the pooled rule worse. Details and the figure are in the Checkpoint 4 report.
 
+## 2026-11-21 — Checkpoint 5, automatic complementary geometry
+
+Question. Once the blocks are not given to the method, does a multi-objective Rashomon rule find and keep complementary directions better than unrestricted CoMDS and better than Isomap or one-dimensional concatenation?
+
+Design, fixed before the latent scores of each pilot.
+
+- Privileged baselines on the Checkpoint 4 seeds. Four replications. Concatenated 1D Isomap, block-standardized Isomap and PCA, classical MDS and SMACOF of averaged block distances, CoMDS of the two block configurations, and source-balanced CoMDS of the saved Checkpoint 4 pool.
+- Metric audit on the same seeds. Raw latent coordinates, axis-equalized latent coordinates, and a one-axis embedding, scored on balanced, isometric, and coordinate-wise triplets.
+- Automatic pool. Three replications, n = 160, seeds 6000–6502. Random subsets, random projections, Pearson feature clusters, two Isomap neighborhood sizes, PCA. Five structural losses. Rules: all CoMDS, all Procrustes, pooled multiscale, union of objective bands, Pareto, marginal subset gain, diversity with no quality gate, quality-weighted CoMDS, best single. Epsilon 0.05. Rotation, hidden second curve, four noise embeddings, aspect 5 with scale preserved, 20 nuisance features, noise 0.25.
+- Follow-up, new seeds 8000–8602, after the automatic pool failed to isolate axes. Mutual-information clustering versus Pearson. A 5% band on one-dimensional projection stress. Agreement clustering with no quality gate. Three curves. A shared curve added to every block at weight 1.
+
+Result. Full table in `research/CHECKPOINT_5_REPORT.md`.
+
+On the stretched surface the raw latent coordinates score 0.782 balanced and 1.000 isometric. Equalizing the axes scores 1.000 balanced and 0.782 isometric. Concatenated 1D Isomap matches the equalized geometry (0.986 balanced, 0.787 isometric). Isomap on the full matrix matches the raw geometry (0.759 balanced, 0.965 isometric).
+
+With known blocks, concatenated 1D Isomap beats CoMDS of the block configurations and beats source-balanced CoMDS of the Checkpoint 4 pool (square 0.989 versus 0.945 and 0.956). CoMDS beats classical MDS of the averaged distances and does not beat concatenation. This is not a Rashomon result.
+
+Without block labels, on rotated features, pooled multiscale CoMDS beats unrestricted CoMDS by 0.027 (3 of 3) and ties Isomap (+0.003, 2 of 3). Union, Pareto, and quality weighting stay within 0.02 of unrestricted CoMDS. All of them lose to privileged concatenation by at least 0.14 (3 of 3). Diversity-first loses to unrestricted CoMDS by 0.169 (3 of 3), and by 0.211 when four noise embeddings are added. No automatic rule recovers the short axis of the stretched rotated surface.
+
+Mutual-information concatenation beats Isomap by 0.065 on aligned columns (3 of 3) and loses to it by 0.180 after rotation (0 of 3). The 5% self-view band drops the second curve in 2 of 3 aligned replications (−0.131). Stress pairs and agreement pairs lose to Isomap by about 0.25. Three latent directions do not fit in a two-dimensional embedding: known-block concatenation ties Isomap, and the Rashomon band is worse by 0.072. A shared curve of weight 1 drops even the known-block concatenation to 0.595.
+
 ## Next
 
-Do not submit the S-curve confirmation array. The complementary array is described by `experiments/study8_complementary/generate_sbatch_arrays.py` and was not submitted. It repeats square, stretched, and hidden-second for 25 seeds that do not overlap this pilot, so the specialist-versus-joint gap, the structural filter, and the LoCoMDS failures can be checked independently. Swiss roll stays untrained.
+Do not submit the S-curve confirmation array. Do not submit `experiments/study8_complementary/` as a Rashomon study: concatenation of the known blocks already beats the specialist CoMDS that array would remeasure. No new 25-replication array is prepared. A later study needs a selection rule that, without block labels and after feature mixing, beats both unrestricted aggregation of the same pool and Isomap. Swiss roll stays untrained.

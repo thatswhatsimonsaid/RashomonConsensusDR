@@ -68,6 +68,7 @@ def generate_product(
         "aspect": tuple(aspect),
         "hide_second": bool(hide_second),
         "preserve_scale": bool(preserve_scale),
+        "nuisance": nuisance,
         "n": int(n_samples),
         "random_state": int(random_state),
         "observation_ids": np.arange(n_samples, dtype=np.int64),

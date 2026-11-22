@@ -46,6 +46,77 @@ def hybrid(
     return specific.iloc[np.flatnonzero(keep)].copy()
 
 
+def union_of_objectives(
+    frame: pd.DataFrame,
+    columns: list[str],
+    epsilon: float,
+) -> pd.DataFrame:
+    """Embeddings that are near-best on at least one objective.
+
+    Each column is its own loss. A global loss and a subset loss are not
+    treated as the same number; an embedding can enter through either one.
+    """
+    chosen = set()
+    for column in columns:
+        kept = pooled(frame, epsilon, loss_col=column)
+        chosen.update(str(value) for value in kept["embedding_id"])
+    return frame.loc[frame["embedding_id"].astype(str).isin(chosen)].copy()
+
+
+def pareto_front(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    """Non-dominated embeddings. Every column is minimized."""
+    losses = frame[columns].to_numpy(dtype=float)
+    n = len(frame)
+    keep = np.ones(n, dtype=bool)
+    for i in range(n):
+        if not np.isfinite(losses[i]).all():
+            keep[i] = False
+            continue
+        for j in range(n):
+            if i == j or not np.isfinite(losses[j]).all():
+                continue
+            if np.all(losses[j] <= losses[i] + 1e-12) and np.any(losses[j] < losses[i] - 1e-12):
+                keep[i] = False
+                break
+    return frame.iloc[np.flatnonzero(keep)].copy()
+
+
+def diversity_first(
+    frame: pd.DataFrame,
+    embeddings: dict[str, np.ndarray],
+    k: int = 10,
+    keep_max: int = 6,
+) -> pd.DataFrame:
+    """Greedy neighborhood diversity on the whole pool, with no quality gate.
+
+    The first member is the one least overlapping the others. This can select
+    a noise embedding. It is the comparison that asks whether diversity has
+    to be applied before a quality filter.
+    """
+    ids = [str(value) for value in frame["embedding_id"]]
+    if len(ids) <= 1:
+        return frame.copy()
+    views = [embeddings[key] for key in ids]
+    overlap = pairwise_neighborhood_overlap(views, k=k)
+    mean_overlap = (overlap.sum(axis=1) - 1.0) / max(len(ids) - 1, 1)
+    order = list(np.argsort(mean_overlap))
+    chosen = [ids[int(order[0])]]
+    remaining = [ids[int(i)] for i in order[1:]]
+    index = {key: i for i, key in enumerate(ids)}
+    while remaining and len(chosen) < keep_max:
+        best_id = None
+        best_value = np.inf
+        for candidate in remaining:
+            row = overlap[index[candidate], [index[key] for key in chosen]]
+            value = float(np.max(row))
+            if value < best_value:
+                best_value = value
+                best_id = candidate
+        chosen.append(best_id)
+        remaining.remove(best_id)
+    return frame.loc[frame["embedding_id"].astype(str).isin(chosen)].copy()
+
+
 def diversity_aware(
     frame: pd.DataFrame,
     embeddings: dict[str, np.ndarray],
