@@ -147,3 +147,14 @@ PYTHONPATH=redr python redr/scripts/run_discovery.py
 PYTHONPATH=redr python redr/scripts/run_alternatives.py
 PYTHONPATH=redr python redr/scripts/plot_checkpoint5.py
 ```
+
+## Checkpoint 6 original consensus question
+
+The An and Tang subset and the parametric Rashomon comparison are in `research/CHECKPOINT_6_REPORT.md`. Labels and the Swiss-roll parameter are used only for scoring.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_checkpoint6.py
+PYTHONPATH=redr python redr/scripts/score_checkpoint6_geometry.py
+```
+
+No 25-replication array was prepared. The pilot does not support a Rashomon restriction on these simulations.

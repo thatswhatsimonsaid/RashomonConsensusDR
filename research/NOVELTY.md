@@ -47,3 +47,11 @@ Sun, Huang, Parikh, and Rudin define the Rashomon set of a dimension-reduction l
 Zheng, Zhu, Li, Pang, Wang, and Chen (arXiv:2004.03106) build a shared graph and a complementary graph for multi-view subspace clustering. The views are given, and the output is a clustering. An and Tang already aggregate given embeddings. Bai, Wang, Long, and Hu already combine given distance matrices.
 
 Checkpoint 5 asked whether a Rashomon rule can discover those views from an unlabeled matrix and keep the ones a global score deletes. The local answer is no. Concatenating one-dimensional Isomaps of known blocks beats CoMDS of those blocks. After the columns are rotated, objective-specific bands, Pareto selection, and diversity rules do not beat Isomap, and the one clustering that beats Isomap on aligned columns is undone by its own 5% band. That is a boundary on the claim, not a new aggregator. A later claim has to beat unrestricted aggregation of the same automatic pool and beat Isomap after the blocks have been mixed, without using the latent coordinates to choose the pool.
+
+## Checkpoint 6
+
+The original proposal was to build a Rashomon set inside each dimension-reduction method and aggregate those sets with CoMDS or LoCoMDS. Checkpoint 6 runs that comparison on the An and Tang Gaussian mixture and Swiss roll, with the five parametric families from Sun et al. and a short alignment grid.
+
+On the Gaussian mixture the clusters are already separated by PCA, and every consensus reaches adjusted Rand 1. On the Swiss roll the best InfoNCE embedding scores 0.792 and unrestricted CoMDS of the thirty parametric embeddings scores 0.750. The 5% loss band scores 0.753. Definition 3.2, the overlap band, quality weights, and size-matched draws stay within 0.003 of the unrestricted fit. Common-knowledge UMAP scores 0.706. The LoCoMDS unfold from the An and Tang manuscript was not reproduced with the eleven methods available here.
+
+There is no remaining claim that a Rashomon restriction improves this consensus, makes it more stable, or makes it cheaper, on the simulations that motivated the two papers. The project should pause rather than search for another manifold on which the restriction wins.

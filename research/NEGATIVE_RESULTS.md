@@ -75,3 +75,15 @@ The tables are in `research/CHECKPOINT_5_REPORT.md`. These designs did not produ
 - Agreement clustering with no quality gate loses to Isomap by about 0.25 on the square and lowers recovery when the second curve is absent.
 - Three informative directions in a two-dimensional embedding: known-block concatenation ties Isomap (difference −0.000, sd 0.031). The cluster Rashomon band is worse than keeping every large cluster (−0.072, sd 0.080, worse in 2 of 3).
 - A shared curve added to every block at weight 1 drops known-block concatenation to balanced 0.595. The integration fails when the blocks themselves are mixed.
+
+## Checkpoint 6, one sample of each paper simulation
+
+The tables are in `research/CHECKPOINT_6_REPORT.md`.
+
+- On the Gaussian mixture, PCA has adjusted Rand 0.972. CoMDS of the eleven-view subset, LoCoMDS, UMAP, t-SNE, and Meta-Spec kernel PCA are all at or above 0.97. There is no accuracy gap for a Rashomon set to close. Meta-Spec kernel PCA tightens the clusters (within/between distance 0.10) relative to CoMDS (0.20) and PCA (0.31).
+- On the Swiss roll at n = 400, LoCoMDS with the reduced grid has balanced triplet 0.654 and end gap 8.0. CoMDS has 0.672 and 13. UMAP has 0.771 and 39. The manuscript claim that LoCoMDS unfolds the roll was not reproduced with the eleven available methods and three LoCoMDS settings.
+- The 5% method-specific loss band keeps every Gaussian parametric embedding. Native-loss spans inside each method are at most 4.5%. On the Swiss roll the band drops four embeddings, all of them lambda 5, and the balanced triplet moves from 0.750 to 0.753. The best InfoNCE embedding scores 0.792. Five size-matched draws of 26 embeddings sit between 0.749 and 0.751.
+- Definition 3.2, applied as a median soft-Jaccard band, keeps 15 embeddings and scores 0.750 on the Swiss roll. The overlap band scores 0.748. Common-knowledge UMAP scores 0.706.
+- The loss-band CoMDS fit on the Swiss roll took 52 seconds. Unrestricted CoMDS of the same 30 embeddings took 36 seconds.
+- Neighbor-vote entropy on the parametric Gaussian pool has Spearman correlation 0.068 with the rate of false voted neighbors. Mean purity is 0.9997. The loss-band pool is the same set of embeddings.
+- Under one noise shift of standard deviation 0.25, CoMDS of four classical views has Procrustes RMSE 0.148, next to PCA at 0.142. That comparison does not include a Rashomon filter.
