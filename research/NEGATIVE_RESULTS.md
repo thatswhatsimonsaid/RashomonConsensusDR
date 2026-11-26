@@ -87,3 +87,16 @@ The tables are in `research/CHECKPOINT_6_REPORT.md`.
 - The loss-band CoMDS fit on the Swiss roll took 52 seconds. Unrestricted CoMDS of the same 30 embeddings took 36 seconds.
 - Neighbor-vote entropy on the parametric Gaussian pool has Spearman correlation 0.068 with the rate of false voted neighbors. Mean purity is 0.9997. The loss-band pool is the same set of embeddings.
 - Under one noise shift of standard deviation 0.25, CoMDS of four classical views has Procrustes RMSE 0.148, next to PCA at 0.142. That comparison does not include a Rashomon filter.
+
+## Checkpoint 7, quality by diversity
+
+The tables are in `research/CHECKPOINT_7_REPORT.md`. These are the unfavorable parts of a factorial that also contains the cells where a 5% band beats unrestricted CoMDS. Those gains lose to full-pool Gibbs and are recorded in the same report. They are not retired by the harmful cells, and the harmful cells are not retired by the gains.
+
+- Exchangeable high-quality copies. The band loses 0.019 to unrestricted CoMDS (sd 0.005, 0 of 4) and 0.011 to Gibbs (0 of 4). Fresh seeds: −0.013 (0 of 4).
+- Shared axis shrink. Identical copies move by −0.001 (2 of 4). Filtering does not remove a distortion every candidate carries. The absolute level stays near 0.79, below the unshared copies.
+- Misleading score, mixed complementary. The band scores 0.557 against 0.922 for the pool that ignores the score (−0.365, sd 0.018, 0 of 4). Fresh seeds: −0.360 (0 of 4). A null score loses 0.171 (0 of 4). Gibbs falls too, and by less.
+- Complementary specialists. The prediction that a within-method band would beat a global trim did not hold. Mixed complementary: band 0.911, trim 0.924, Gibbs 0.937, full pool 0.912. High complementary loses 0.040 to the full pool (0 of 4).
+- One homogeneously wrong method. High harmful: band 0.530 against full pool 0.933 (−0.403, sd 0.019, 0 of 4). The retained set averages 3.5 mis-paired draws out of 5.5. Method-balanced weights on the same set score 0.924. The oracle band, which uses latent error inside each method, still scores 0.671. LoCoMDS of the band loses 0.449 to LoCoMDS of the full pool (0 of 4). Fresh seeds: mean −0.201 (sd 0.206), positive in 1 of 4, and that replication kept a faithful majority.
+- Epsilon 0.05 is the worst point on the high-harmful curve (0.530, against 0.918 at epsilon 0 and 0.933 at infinity). An intermediate tolerance is not a default optimum.
+- The weak-score harmful cell gains 0.054 on the full pool and ties Gibbs at +0.004 (2 of 4). The informative version of the same cell loses. That gain is a scale artifact of a relative epsilon, not a method.
+- Swiss roll with a planted permuted t-SNE family, seeds 3000–3003. The 5% band keeps all four permuted embeddings in 4 of 4 replications. Balanced triplet 0.599 against unrestricted 0.638 (−0.039, sd 0.050, better in 1 of 4), Gibbs 0.644, and a trim that drops the permuted family at 0.675. Trustworthiness of the consensus falls from 0.921 to 0.805. The bad family was planted. The result says the relative rule keeps it.

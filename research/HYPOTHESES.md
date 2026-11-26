@@ -31,3 +31,13 @@ Uniform weights over-represent a method with more retained views or with duplica
 ## H7. Uncertainty
 
 Neighborhood disagreement may identify unreliable relationships even if weighting by that disagreement does not improve the embedding. That diagnostic is not part of the confirmatory S-curve endpoint.
+
+## Readings after Checkpoint 7
+
+H3. On the harmful factor, epsilon 0.05 is the worst point of the prespecified curve, and epsilon 0 and infinity are not. The curve is not unimodal.
+
+H4. A within-method band does not remove a shared axis shrink, and it does not remove a method whose own members are exchangeable and wrong. It also does not improve on the full pool when methods err on different axes. The cell where it beats the full pool is bad draws inside every method, and Gibbs weights match that gain.
+
+H5. LoCoMDS has the same sign as CoMDS on the eleven cells where both were fit, including the −0.45 loss on the harmful factor.
+
+H6. Equal method mass is what stops the bad majority. Uniform weights on the epsilon-0.05 harmful set score 0.530. Method-balanced weights on that set score 0.924.
