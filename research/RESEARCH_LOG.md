@@ -150,3 +150,19 @@ Swiss roll, seeds 3000–3003, n = 180. Isomap, t-SNE, UMAP, jittered PCA, plus 
 ## Next
 
 Do not submit a 25-replication array. No cell beat unrestricted CoMDS, Gibbs, the trim, the best embedding, and a size-matched draw together. The next measurement is descriptive: within-method loss span and between-method disagreement on fully trained UMAP, InfoNCE, PaCMAP, NCVis, and t-SNE, with a longer schedule than Checkpoint 6, and no new epsilon.
+
+## 2026-11-25 — Checkpoint 8, natural candidate pools
+
+Experiment ID: `S11-NATURAL`.
+
+Question. Do adequately trained UMAP, InfoNCE, negative t-SNE, NCVis, and PaCMAP pools contain the within-method contamination or the homogeneously bad method from Checkpoint 7?
+
+Design, frozen in `experiments/study11_natural_diversity/config.yaml` before the consensus scores. Two hundred CNE epochs and 450 PaCMAP epochs, chosen from a one-seed loss diagnostic and not revised afterward. Primary pool: k = 15, alignment weight 0, seeds 0, 1, 2. UMAP at k = 5 and k = 50, and UMAP and InfoNCE at alignment weight 5, are separate objectives. Swiss roll seed 4000, S-curve seed 4100, stratified digits seed 4200. The trim uses 1 minus trustworthiness. Latent coordinates and digit labels are evaluation only.
+
+Result. Full table in `research/CHECKPOINT_8_REPORT.md`.
+
+The widest primary native span is 0.022. The 5% band keeps 15 of 15 embeddings on all three datasets, so uniform Rashomon CoMDS matches unrestricted CoMDS. No primary method is 0.08 worse in trustworthiness than the others. The unsupervised rule calls the Swiss roll and the S-curve complementary candidates. The latent triplets show a shared missing short axis, not a split of the two axes across methods. UMAP at 50 neighbors is homogeneously weaker (digits trustworthiness 0.890 against 0.940) and its own three seeds still agree, so a relative band inside that family keeps all of them.
+
+## Next
+
+Do not add a selection rule and do not submit a 25-replication array. Another epsilon sweep on these three datasets would be tuning a null. A later pool is worth the Checkpoint 7 comparison only if one fixed loss has a within-method native span above 5% that tracks trustworthiness, or one method is at least 0.08 worse in trustworthiness while its own seeds agree.

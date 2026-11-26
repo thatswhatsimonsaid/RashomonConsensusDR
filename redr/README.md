@@ -171,3 +171,14 @@ PYTHONPATH=redr python redr/scripts/run_dr_mechanism.py
 ```
 
 No 25-replication array was prepared. The 5% band does not beat unrestricted CoMDS and Gibbs weights together.
+
+## Checkpoint 8 natural candidate pools
+
+Trained UMAP, InfoNCE, negative t-SNE, NCVis, and PaCMAP embeddings are in `research/CHECKPOINT_8_REPORT.md`. Native losses are compared only inside one method, neighbor count, and alignment weight. Latent coordinates and digit labels are evaluation columns.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_natural_diversity.py
+PYTHONPATH=redr python redr/scripts/plot_natural_diversity.py
+```
+
+No 25-replication array was prepared. At a fixed objective the 5% band keeps every trained seed.

@@ -1,0 +1,2 @@
+systematically_bad,contaminated_within_method,loss_varies_unstructured,complementary_candidate,exchangeable,diverse_similar_loss,bad_methods,within_disagreement,between_disagreement,max_span,trust_range,primary,within_overlap,between_overlap,dataset
+False,False,False,False,False,True,,0.18464271857634745,0.2744842413192935,0.014506456122170708,0.02188361508452541,diverse_similar_loss,0.5967414772734336,0.4505507427756487,digits
