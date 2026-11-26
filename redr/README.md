@@ -158,3 +158,16 @@ PYTHONPATH=redr python redr/scripts/score_checkpoint6_geometry.py
 ```
 
 No 25-replication array was prepared. The pilot does not support a Rashomon restriction on these simulations.
+
+## Checkpoint 7 quality and diversity
+
+The factorial, the fresh-seed confirmation, and the Swiss-roll check with one planted bad family are in `research/CHECKPOINT_7_REPORT.md`. Latent coordinates are not an input to selection. The oracle rows are labeled and are an upper bound.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_quality_diversity.py
+PYTHONPATH=redr python redr/scripts/plot_quality_diversity.py
+PYTHONPATH=redr python redr/scripts/run_quality_diversity_confirm.py
+PYTHONPATH=redr python redr/scripts/run_dr_mechanism.py
+```
+
+No 25-replication array was prepared. The 5% band does not beat unrestricted CoMDS and Gibbs weights together.

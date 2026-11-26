@@ -130,3 +130,23 @@ The 5% loss band keeps all 30 Gaussian embeddings and 26 of 30 Swiss embeddings.
 ## Next
 
 Pause the original REDR direction. Do not submit a 25-replication array, and do not add another selection rule on the product manifolds or on these two simulations. CoMDS of heterogeneous embeddings remains An and Tang's method. These pilots do not show that a Rashomon restriction is what makes that consensus work.
+
+## 2026-11-25 — Checkpoint 7, quality by diversity
+
+Experiment IDs: `S10-QD`, `S10-QD-CONFIRM`, `S10-DR-MECH`.
+
+Checkpoint 6 recommended pausing the search for a manifold on which a Rashomon band wins. This checkpoint does not resume that search. The question is which quality and diversity conditions move a within-method band, relative to unrestricted CoMDS, Gibbs weights, a global trim, the best single embedding, and a size-matched draw.
+
+Design, frozen in `experiments/study10_quality_diversity/config.yaml` before any consensus score from this study. Square, n = 80, three methods, four draws, four replications, seed 11000. Quality is high, mostly high, mixed, severe, or a shared axis shrink. Diversity is identical, a smooth warp, complementary axis damage, or one method that is a row permutation. The selection score is a noisy copy of latent error, a weakly informative copy, uniform noise, or the reflected error. Oracle rows copy the latent error and are labeled. Epsilon grid 0, 0.05, 0.25, 1, infinity. Primary epsilon 0.05. LoCoMDS on eleven named cells only.
+
+Result. Full table in `research/CHECKPOINT_7_REPORT.md`.
+
+On high identical copies the band loses 0.019 to the full pool (0 of 4). On severe identical copies it gains 0.042 (4 of 4) and loses 0.009 to full-pool Gibbs (0 of 4). On high harmful it loses 0.403 (0 of 4): the band keeps 3.5 of the mis-paired method's draws out of 5.5 retained, and uniform CoMDS follows them. Method-balanced weights on that same set score 0.924. The oracle band still scores 0.671 against 0.933 for the pool that ignores the score. The complementary prediction failed: mixed complementary is −0.001 versus the full pool and −0.026 versus Gibbs. Misleading scores drop the band by 0.365 (0 of 4). Epsilon 0.05 is the worst point on the harmful curve.
+
+Fresh seeds 21000, five frozen cells, no LoCoMDS. Severe identical stays at +0.035 versus the pool and −0.002 versus Gibbs. The harmful mean is −0.201 (1 of 4 positive). The positive replication is the one that kept a faithful majority.
+
+Swiss roll, seeds 3000–3003, n = 180. Isomap, t-SNE, UMAP, jittered PCA, plus a row-rolled copy of each t-SNE as its own family. Score is 1 minus trustworthiness against the observations. The 5% band keeps all four permuted embeddings in 4 of 4 replications and scores 0.599 against unrestricted CoMDS at 0.638 and a global trim at 0.675. Gibbs on the band scores 0.646.
+
+## Next
+
+Do not submit a 25-replication array. No cell beat unrestricted CoMDS, Gibbs, the trim, the best embedding, and a size-matched draw together. The next measurement is descriptive: within-method loss span and between-method disagreement on fully trained UMAP, InfoNCE, PaCMAP, NCVis, and t-SNE, with a longer schedule than Checkpoint 6, and no new epsilon.
