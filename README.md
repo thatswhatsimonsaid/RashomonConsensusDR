@@ -16,7 +16,8 @@ The research code, Checkpoint 1 results, and Checkpoint 2 experiments are in [`r
 | `research/CHECKPOINT_5_REPORT.md` | Automatic discovery, multi-objective Rashomon sets, and the metric audit |
 | `research/CHECKPOINT_6_REPORT.md` | An and Tang simulations and method-specific Rashomon consensus |
 | `research/CHECKPOINT_7_REPORT.md` | Quality-diversity factorial and the bad-majority mechanism |
-| `research/RESEARCH_LOG.md` | Checkpoint 3 through 7 logs |
+| `research/CHECKPOINT_8_REPORT.md` | Trained UMAP, InfoNCE, t-SNE, NCVis, and PaCMAP pools |
+| `research/RESEARCH_LOG.md` | Checkpoint 3 through 8 logs |
 | `research/NEGATIVE_RESULTS.md` | Unfavorable findings that stay in the record |
 
 `external/` is for local checkouts of RashomonDR and coMDS and is not part of this repository. `redr/setup_vendor.sh` clones the pinned commits into `redr/vendor/`.

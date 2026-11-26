@@ -100,3 +100,14 @@ The tables are in `research/CHECKPOINT_7_REPORT.md`. These are the unfavorable p
 - Epsilon 0.05 is the worst point on the high-harmful curve (0.530, against 0.918 at epsilon 0 and 0.933 at infinity). An intermediate tolerance is not a default optimum.
 - The weak-score harmful cell gains 0.054 on the full pool and ties Gibbs at +0.004 (2 of 4). The informative version of the same cell loses. That gain is a scale artifact of a relative epsilon, not a method.
 - Swiss roll with a planted permuted t-SNE family, seeds 3000–3003. The 5% band keeps all four permuted embeddings in 4 of 4 replications. Balanced triplet 0.599 against unrestricted 0.638 (−0.039, sd 0.050, better in 1 of 4), Gibbs 0.644, and a trim that drops the permuted family at 0.675. Trustworthiness of the consensus falls from 0.921 to 0.805. The bad family was planted. The result says the relative rule keeps it.
+
+## Checkpoint 8, trained UMAP, InfoNCE, negative t-SNE, NCVis, and PaCMAP
+
+The tables are in `research/CHECKPOINT_8_REPORT.md`.
+
+- At k = 15 and alignment weight 0, three seeds of each method have native-loss spans of at most 0.022. The 5% band keeps all 15 embeddings on the Swiss roll, the S-curve, and digits. Uniform Rashomon CoMDS matches unrestricted CoMDS on each dataset.
+- No primary method is 0.08 below the best method in trustworthiness. The contaminated regime and the homogeneously bad regime do not occur inside a fixed objective.
+- The unsupervised rule calls the Swiss roll and the S-curve complementary candidates. Latent triplets do not. S-curve arc triplets sit near 0.91 and height triplets near 0.55 for every method. Swiss-roll balanced triplets sit between 0.53 and 0.66. The disagreement is layout variation on a shared missing axis.
+- The best single embedding beats the consensus on the intrinsic score: Swiss PaCMAP 0.606 against unrestricted CoMDS 0.546, S-curve InfoNCE 0.804 against 0.788. Digits PaCMAP trustworthiness is 0.956 against unrestricted CoMDS 0.938.
+- UMAP at 50 neighbors is weaker and internally consistent. Digits trustworthiness is 0.890 against 0.940 at 15 neighbors, label purity 0.657 against 0.851, native span 0.009. A relative band inside that family keeps every seed. The losses are not pooled with the 15-neighbor family, because the graphs differ.
+- Alignment weight 5 changes trustworthiness by at most 0.006. The trust trim on the Swiss roll drops negative t-SNE over a 0.01 gap and leaves the balanced triplet at 0.546.

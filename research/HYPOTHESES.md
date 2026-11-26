@@ -41,3 +41,11 @@ H4. A within-method band does not remove a shared axis shrink, and it does not r
 H5. LoCoMDS has the same sign as CoMDS on the eleven cells where both were fit, including the −0.45 loss on the harmful factor.
 
 H6. Equal method mass is what stops the bad majority. Uniform weights on the epsilon-0.05 harmful set score 0.530. Method-balanced weights on that set score 0.924.
+
+## Readings after Checkpoint 8
+
+H2. A 64-dimensional digits subset and two noisy manifolds were scored. Inside a fixed objective the native spans stay below 0.05, including on digits. Observation noise and dimension did not by themselves create a within-method Rashomon set.
+
+H3. From epsilon 0.05 through infinity the trained pools are the full pool. Epsilon 0 keeps one seed per method and does not filter a bad draw, because the seeds are tied.
+
+H4. The trained methods do not err in different intrinsic directions. On the S-curve every method keeps the arc and loses the height. A relative band cannot remove a distortion that every near-best embedding shares.
