@@ -52,9 +52,11 @@ def fit_cne(
     n_epochs: int,
     k: int = 15,
     graph=None,
+    early_exaggeration: bool = True,
+    spectrum: float | None = None,
 ) -> tuple[np.ndarray, float]:
     set_seed(seed)
-    model = cne.CNE(
+    kwargs = dict(
         optimizer="adam",
         parametric=True,
         loss_mode=loss_mode,
@@ -67,8 +69,25 @@ def fit_cne(
         negative_samples=5,
         use_keops=False,
         print_freq_epoch=None,
-        early_exaggeration=True,
+        early_exaggeration=bool(early_exaggeration),
     )
+    if spectrum is not None:
+        kwargs["s"] = float(spectrum)
+    # The vendored loss returns an undefined neighbor tensor when a batch has
+    # at most negative_samples * embedding_dim rows. Dropping the incomplete
+    # final batch of edges avoids that path. It does not change the objective.
+    from cne._cne import FastTensorRegressionDataLoader
+
+    if not getattr(FastTensorRegressionDataLoader, "_redr_drop_last", False):
+        original_init = FastTensorRegressionDataLoader.__init__
+
+        def _drop_incomplete(self, *args, **init_kwargs):
+            init_kwargs["drop_last"] = True
+            return original_init(self, *args, **init_kwargs)
+
+        FastTensorRegressionDataLoader.__init__ = _drop_incomplete
+        FastTensorRegressionDataLoader._redr_drop_last = True
+    model = cne.CNE(**kwargs)
     started = time.perf_counter()
     embedding = model.fit_transform(np.asarray(x, dtype=np.float32), x_pca, graph=graph)
     elapsed = time.perf_counter() - started
