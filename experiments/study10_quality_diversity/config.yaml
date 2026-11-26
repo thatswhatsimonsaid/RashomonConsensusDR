@@ -1,0 +1,44 @@
+# Quality × diversity factorial. Frozen before any consensus score from this study.
+# Embeddings are perturbations of a known square. They are not UMAP or t-SNE.
+# The selection score is not the latent error, except the oracle rows, which
+# are an upper bound and are labeled oracle.
+
+n: 80
+n_methods: 3
+per_method: 4
+replications: 4
+seed0: 11000
+n_triplets: 2000
+epsilons: [0.0, 0.05, 0.25, 1.0, .inf]
+qualities: [high, mostly_high, mixed, severe, shared]
+diversities: [identical, moderate, complementary, harmful]
+primary_score: informative
+score_slice:
+  quality: mixed
+  diversities: [complementary, harmful]
+  scores: [weak, none, misleading]
+# Each entry is [quality, diversity, score].
+locomds_cells:
+  - [high, identical, informative]
+  - [severe, identical, informative]
+  - [high, complementary, informative]
+  - [mixed, complementary, informative]
+  - [severe, complementary, informative]
+  - [high, harmful, informative]
+  - [severe, harmful, informative]
+  - [shared, complementary, informative]
+  - [mixed, complementary, misleading]
+  - [mixed, complementary, none]
+  - [mixed, harmful, informative]
+primary_metric: intrinsic_triplet_balanced
+secondary_metric: intrinsic_triplet_isometric
+trim_fraction: 0.25
+size_matched_draws: 3
+gibbs_beta: 1.0
+predictions:
+  identical_high: "Exchangeable copies. A tight band can discard draws that averaging would have used. No Rashomon benefit is expected."
+  shared_any: "Every candidate carries the same axis shrink. Filtering cannot remove it."
+  misleading: "The score prefers the worse geometry. The band should lose to the unrestricted pool."
+  severe_identical: "Bad draws sit in every method. A score that tracks error should drop them. Trim and the best single embedding are the alternatives that have to be beaten."
+  complementary_mixed: "Specialists are useful and have worse global error than the intact method. A global trim can drop them. A within-method band can keep each specialist's cleaner draws."
+  harmful_high: "One method is a systematic mis-pairing. A within-method band keeps it. A global trim can drop it."
