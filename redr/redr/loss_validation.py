@@ -36,6 +36,7 @@ def _contrastive_once(
     loss_mode: str,
     negative_indices: torch.Tensor,
     negative_samples: int,
+    spec_param: float = 1.0,
 ) -> float:
     y = torch.tensor(np.asarray(embedding), dtype=torch.float32)
     positive = y[torch.as_tensor(positive_index, dtype=torch.long)]
@@ -46,7 +47,7 @@ def _contrastive_once(
         metric="euclidean",
         temperature=0.5,
         eps=torch.tensor(1.0),
-        spec_param=torch.tensor(1.0),
+        spec_param=torch.tensor(float(spec_param)),
         clamp_high=1.0,
         clamp_low=1e-4,
         seed=0,
@@ -74,6 +75,7 @@ def contrastive_reference_loss(
     negative_samples: int = 5,
     n_draws: int = 4,
     base_seed: int = 1000,
+    spec_param: float = 1.0,
 ) -> tuple[float, float]:
     """Mean and std of ContrastiveLoss on a shared positive graph and shared negatives."""
     embedding = np.asarray(embedding, dtype=np.float64)
@@ -95,6 +97,7 @@ def contrastive_reference_loss(
                     loss_mode,
                     negatives,
                     negative_samples,
+                    spec_param,
                 )
             )
     array = np.asarray(values, dtype=float)

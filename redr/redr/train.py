@@ -30,12 +30,12 @@ def high_d_neighbors(x: np.ndarray, k: int) -> np.ndarray:
     return nn.kneighbors(return_distance=False)[:, 1:]
 
 
-def pacmap_pairs(x: np.ndarray, seed: int = 0):
+def pacmap_pairs(x: np.ndarray, seed: int = 0, n_neighbors: int = 10, n_mn: int = 5, n_fp: int = 20):
     neighbors, mid_near, further, _tree = generate_pair(
         np.asarray(x, dtype=np.float32),
-        n_neighbors=10,
-        n_MN=5,
-        n_FP=20,
+        n_neighbors=int(n_neighbors),
+        n_MN=int(n_mn),
+        n_FP=int(n_fp),
         distance="euclidean",
         verbose=False,
         random_state=seed,
@@ -101,14 +101,17 @@ def fit_pacmap(
     label_weight: float,
     n_epochs: int,
     pairs,
+    n_neighbors: int = 10,
+    n_mn: int = 5,
+    n_fp: int = 20,
 ) -> tuple[np.ndarray, float]:
     set_seed(seed)
     neighbors, mid_near, further = pairs
     model = ParamPaCMAP(
         n_components=2,
-        n_neighbors=10,
-        n_MN=5,
-        n_FP=20,
+        n_neighbors=int(n_neighbors),
+        n_MN=int(n_mn),
+        n_FP=int(n_fp),
         model_dict={
             "backbone": "ANN",
             "layer_size": [100, 100, 100],

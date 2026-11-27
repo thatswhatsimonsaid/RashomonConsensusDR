@@ -1,0 +1,97 @@
+# Cross-objective pools. Frozen before any consensus score from this study.
+# Native losses are compared only inside one config_id. The loss scale is
+# s(a,c) = max(|L*(a,c)|, 1e-8), so the band is L* + epsilon * s.
+# Latent coordinates and digit labels are evaluation columns.
+# Alignment weight stays 0: Checkpoint 8 found that weight 5 did not move
+# trustworthiness, and it is not part of this objective grid.
+# negative_samples stays 5, the vendor default used by the reference loss.
+# NCVis (loss_mode nce) does not use the spectrum parameter. Its objective
+# change is the neighbor graph. Negative t-SNE does use the spectrum:
+# s=0 is the t-SNE end and s=1 is the UMAP end of the vendor map.
+
+n: 240
+digits_n: 300
+cne_epochs: 200
+pacmap_epochs: 450
+tsne_max_iter: 1000
+train_seeds: [0, 1, 2]
+negative_samples: 5
+n_draws: 1
+reference_seed: 1000
+epsilon: 0.05
+trim_fraction: 0.25
+n_triplets: 2000
+overlap_ks: [5, 15, 30]
+local_k: 15
+redundancy_overlap: 0.98
+size_matched_draws: 3
+gibbs_beta: 1.0
+axis_gap: 0.05
+pacmap_mn: 5
+pacmap_fp: 20
+datasets:
+  - {name: s_curve, kind: s_curve, seeds: [5100, 5101, 5102], noise: 0.08, nuisance: 0}
+  - {name: swiss, kind: swiss, seeds: [5200, 5201, 5202], noise: 0.12, nuisance: 0}
+  - {name: digits, kind: digits, seeds: [5300, 5301, 5302], noise: 0.0, nuisance: 0}
+  - {name: s_curve_nuisance, kind: s_curve, seeds: [5400], noise: 0.08, nuisance: 10, train_seeds: [0]}
+methods:
+  - name: umap
+    kind: cne
+    loss_mode: umap
+    early_exaggeration: false
+    default: {k: 15}
+    grid:
+      - {k: 5}
+      - {k: 15}
+      - {k: 30}
+      - {k: 50}
+  - name: infonce
+    kind: cne
+    loss_mode: infonce
+    early_exaggeration: true
+    default: {k: 15}
+    grid:
+      - {k: 15}
+      - {k: 50}
+  - name: neg_tsne
+    kind: cne
+    loss_mode: neg
+    early_exaggeration: true
+    default: {k: 15, spectrum: 0.0}
+    grid:
+      - {k: 15, spectrum: 0.0}
+      - {k: 15, spectrum: 1.0}
+      - {k: 50, spectrum: 0.0}
+  - name: nce
+    kind: cne
+    loss_mode: nce
+    early_exaggeration: false
+    default: {k: 15}
+    grid:
+      - {k: 15}
+      - {k: 50}
+  - name: pacmap
+    kind: pacmap
+    default: {n_neighbors: 10}
+    grid:
+      - {n_neighbors: 10}
+      - {n_neighbors: 30}
+  - name: tsne
+    kind: tsne
+    default: {perplexity: 30}
+    grid:
+      - {perplexity: 10}
+      - {perplexity: 30}
+      - {perplexity: 50}
+  - name: isomap
+    kind: isomap
+    default: {k: 15}
+    grid:
+      - {k: 8}
+      - {k: 15}
+      - {k: 30}
+  - name: pca
+    kind: pca
+    default: {}
+    grid:
+      - {}
