@@ -182,3 +182,14 @@ PYTHONPATH=redr python redr/scripts/plot_natural_diversity.py
 ```
 
 No 25-replication array was prepared. At a fixed objective the 5% band keeps every trained seed.
+
+## Checkpoint 9 cross-objective ensembles
+
+Twenty objective configurations of the same families, plus t-SNE, Isomap, and PCA, are in `research/CHECKPOINT_9_REPORT.md`. Native losses stay inside one configuration. The hierarchical band is fit only when it removes someone.
+
+```bash
+PYTHONPATH=redr python redr/scripts/run_cross_objective.py
+PYTHONPATH=redr python redr/scripts/plot_cross_objective.py
+```
+
+No 25-replication array was prepared. The full heterogeneous pool does not beat a strong single embedding, and the 5% band does not improve the consensus.
