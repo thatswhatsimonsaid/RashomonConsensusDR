@@ -49,3 +49,11 @@ H2. A 64-dimensional digits subset and two noisy manifolds were scored. Inside a
 H3. From epsilon 0.05 through infinity the trained pools are the full pool. Epsilon 0 keeps one seed per method and does not filter a bad draw, because the seeds are tied.
 
 H4. The trained methods do not err in different intrinsic directions. On the S-curve every method keeps the arc and loses the height. A relative band cannot remove a distortion that every near-best embedding shares.
+
+## Readings after Checkpoint 9
+
+H7. Changing the neighbor graph, the negative-t-SNE spectrum, or the t-SNE perplexity increases geometric disagreement and does not assign the two intrinsic axes to different configurations. On the S-curve, UMAP at 50 neighbors raises the height triplet by 0.07 and drops the arc triplet by 0.25.
+
+H8. A within-configuration 5% band on these objectives is inactive or drops one or two seeds. Hierarchical CoMDS does not beat the full pool. The seeds it drops are not the configurations that give up the arc.
+
+H9. Adding the non-default objectives lowers the S-curve balanced triplet of CoMDS from 0.763 to 0.728. Configuration balance and native Gibbs do not recover that gap. Quality weights recover part of it and still lose to the best single embedding.

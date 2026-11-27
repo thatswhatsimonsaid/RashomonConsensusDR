@@ -166,3 +166,19 @@ The widest primary native span is 0.022. The 5% band keeps 15 of 15 embeddings o
 ## Next
 
 Do not add a selection rule and do not submit a 25-replication array. Another epsilon sweep on these three datasets would be tuning a null. A later pool is worth the Checkpoint 7 comparison only if one fixed loss has a within-method native span above 5% that tracks trustworthiness, or one method is at least 0.08 worse in trustworthiness while its own seeds agree.
+
+## 2026-11-26 — Checkpoint 9, cross-objective ensembles
+
+Experiment ID: `S12-CROSS`.
+
+Question. Do near-optimal embeddings from different dimension-reduction objectives carry complementary geometry, and does a within-configuration Rashomon band improve their consensus?
+
+Design, frozen in `experiments/study12_cross_objective/config.yaml` before any consensus score from this study. Twenty configurations: parametric UMAP at 5, 15, 30, and 50 neighbors; InfoNCE at 15 and 50; negative t-SNE at spectrum 0 with 15 and 50 neighbors and at spectrum 1 with 15; NCVis at 15 and 50; PaCMAP at 10 and 30 neighbors; t-SNE at perplexity 10, 30, and 50; Isomap at 8, 15, and 30; PCA. Three seeds, 200 CNE epochs, 450 PaCMAP epochs. Native losses stay inside one configuration. The loss scale is the absolute value of the best loss in that configuration. S-curve seeds 5100–5102, Swiss roll 5200–5202, digits 5300–5302, and one S-curve with ten nuisance coordinates at seed 5400. The primary synthetic score is the balanced intrinsic triplet. Latent coordinates and digit labels are evaluation only.
+
+Result. Full table in `research/CHECKPOINT_9_REPORT.md`.
+
+Seeds of one configuration have 15-neighborhood overlap near 0.82. Different configurations have overlap near 0.52 to 0.57 on the clean manifolds. The disagreement is not a split of the two intrinsic axes. On the S-curve every nonlinear configuration has mean height-triplet accuracy between 0.53 and 0.61, and raising the UMAP neighborhood from 15 to 50 trades arc 0.874 for height 0.607 and balanced accuracy 0.643. Full-pool CoMDS scores 0.728 against 0.763 for the fixed-objective pool and 0.778 for the best default UMAP. The 5% band is inactive on all three digits replications. Where it is active it drops one or two seeds, and hierarchical CoMDS scores 0.718 on the S-curve and 0.566 on the Swiss roll, against 0.728 and 0.568 for the full pool. The nuisance coordinates collapse the arc for every method.
+
+## Next
+
+Do not add an aggregator and do not submit a 25-replication array. A later pool is worth this comparison only if a trained objective preserves an intrinsic direction the others lose and an unsupervised score still ranks that view above the locally faithful ones. Trustworthiness does the opposite on these manifolds.

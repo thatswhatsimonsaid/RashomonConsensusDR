@@ -111,3 +111,14 @@ The tables are in `research/CHECKPOINT_8_REPORT.md`.
 - The best single embedding beats the consensus on the intrinsic score: Swiss PaCMAP 0.606 against unrestricted CoMDS 0.546, S-curve InfoNCE 0.804 against 0.788. Digits PaCMAP trustworthiness is 0.956 against unrestricted CoMDS 0.938.
 - UMAP at 50 neighbors is weaker and internally consistent. Digits trustworthiness is 0.890 against 0.940 at 15 neighbors, label purity 0.657 against 0.851, native span 0.009. A relative band inside that family keeps every seed. The losses are not pooled with the 15-neighbor family, because the graphs differ.
 - Alignment weight 5 changes trustworthiness by at most 0.006. The trust trim on the Swiss roll drops negative t-SNE over a 0.01 gap and leaves the balanced triplet at 0.546.
+
+## Checkpoint 9, cross-objective Rashomon ensembles
+
+The tables are in `research/CHECKPOINT_9_REPORT.md`.
+
+- Seeds of one configuration agree (S-curve 15-neighborhood overlap 0.823). Different neighbor counts, perplexities, and spectra disagree more (overlap 0.567). That disagreement does not split the two intrinsic axes. On the S-curve every nonlinear configuration has mean height-triplet accuracy between 0.53 and 0.61.
+- UMAP at 50 neighbors is not a global specialist that smaller neighborhoods omit. On the S-curve it raises height from 0.535 to 0.607 and drops arc from 0.874 to 0.619. Balanced accuracy falls from 0.759 to 0.643. On digits it is worse at 5-neighborhood preservation (0.215 against 0.448) and at 30-neighborhood preservation (0.505 against 0.551).
+- The full heterogeneous pool is worse than the fixed-objective pool. S-curve balanced triplet 0.728 against 0.763, and against 0.778 for the best default UMAP. Digits trustworthiness 0.895 against 0.956 for one t-SNE. Quality weights reach 0.920 and still lose to that embedding. A random subset of eight embeddings scores 0.719, and the eight prespecified defaults score 0.759.
+- The 5% within-configuration band is inactive on all three digits replications (widest span 0.038). On the S-curve and the Swiss roll it drops one or two seeds of UMAP at 5 neighbors or PaCMAP at 10 neighbors. Hierarchical CoMDS scores 0.718 against 0.728 for the full S-curve pool, and 0.566 against 0.568 on the Swiss roll. The dropped seeds are not the geometrically weak views.
+- The trust trim drops PCA, the view with the highest height triplet (0.656 on the S-curve, 0.634 on the Swiss roll), because its trustworthiness is about 0.87. The balanced score does not rise.
+- Ten Gaussian nuisance coordinates collapse the S-curve arc for every method, from about 0.87 to between 0.52 and 0.60. The full pool scores 0.590 and the best single embedding 0.603. The Rashomon comparison is vacant because that follow-up has one seed per configuration.

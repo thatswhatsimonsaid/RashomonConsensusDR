@@ -67,3 +67,7 @@ The boundary is this. A within-method Rashomon band followed by uniform CoMDS is
 ## Checkpoint 8
 
 Checkpoint 8 asks whether those two regimes occur in trained UMAP, InfoNCE, negative t-SNE, NCVis, and PaCMAP embeddings. On a Swiss roll, an S-curve, and a digits subset, three seeds of a fixed objective have native spans of at most 0.022. The 5% band keeps every embedding, so the Rashomon consensus is the unrestricted consensus. UMAP at 50 neighbors is a weaker family whose own seeds still agree. That is the bad-family arithmetic, and it is a different objective, kept out of the native-loss band. The result does not add a method. It says the mechanism Checkpoint 7 isolated is not what these trained pools contain.
+
+## Checkpoint 9
+
+Checkpoint 9 asks whether changing the objective, rather than the seed, produces complementary geometry that a hierarchical Rashomon ensemble can use. Twenty configurations of UMAP, InfoNCE, negative t-SNE, NCVis, PaCMAP, t-SNE, Isomap, and PCA disagree more than seeds of one configuration. They do not preserve different intrinsic directions. The full pool scores worse than the fixed-objective pool on the S-curve (balanced triplet 0.728 against 0.763) and worse than one t-SNE on digits (trustworthiness 0.895 against 0.956). Where the 5% band removes anyone it removes one or two seeds, and the consensus does not improve. A gain from combining objectives did not appear, so there is no Rashomon effect to separate from that gain. The result does not add a method.
